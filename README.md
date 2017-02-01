@@ -136,3 +136,32 @@ Tiene como interface principal AJCPlayer que define los métodos:
 * **clearEventListeners():** Elimina todos los listeners.
 * **getUrlResolved():** Obtener la URL final del contenido.
 * **getCurrentPosition():** Obtener la posición actual de la reproducción.
+
+## Uso del módulo
+
+### Integración
+AJCPlayer tiene dos implementaciones (AudioPlayer y VideoPlayer).
+
+El constructor de ambas clases será el siguiente:
+```java
+VideoPlayer(Context context, MediaPlayer mediaPlayer)...
+AudioPlayer(Context context, MediaPlayer mediaPlayer)...
+```
+
+En el proyecto de ejemplo se utiliza [Dagger](http://square.github.io/dagger/) para inyección de dependencias. Para ello se ha creado el componente [PlayerComponent.java](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/di/PlayerComponent.java). Será necesario hacer un Build Project la primera vez para que la clase [ExampleApp](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/app/ExampleApp.java) no de error. No es necesario usar Dagger, si decides no usarlo no necesitaras crear nada de esto y puedes crear una instancia de la clase VideoPlayer o AudioPlayer directamente:
+```java
+AJCPlayer videoPlayer = new VideoPlayer(context, new MediaPlayer());
+```
+
+### Controles y eventos
+Cómo vimos antes, AJCPlayer define un método para añadir implementaciones de PlayerEventListener a nuestro reproductor. Estas implementaciones se ejecutaran conforme el estado de nuestra reproducción cambie, por ejemplo si se pausa se lanzara el evento de pause en todos sus listeners.
+```java
+public interface PlayerEventListener {
+    void onPreparing(Asset asset, MediaPlayer mediaPlayer);
+    void onPlayBegins(Asset asset, int duration);
+    void onResume(Asset asset, int currentPosition);
+    void onCompletion(Asset asset);
+    void onPause(Asset asset, int currentPosition);
+    void onForward(Asset asset, int currentPosition);
+}
+```
