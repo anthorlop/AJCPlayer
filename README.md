@@ -8,10 +8,12 @@ Audio and Video Player for Android with HLS and DASH support
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/04.png" width="425"/>
 
 ### Video MP4 / HLS / DASH en ScrollView
+<details>
+   <summary>Ver/Ocultar imágenes</summary>
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/02.png" width="280"/>
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/03.png" width="280"/>
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/05.png" width="280"/>
-
+</details>
 ## Descripción
 El objetivo de esta librería es desacoplar el reproductor de vídeo y audio de las aplicaciones permitiendo personalizar desde tu aplicación la vista del reproductor.
 
