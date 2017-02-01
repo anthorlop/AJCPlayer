@@ -17,7 +17,9 @@ compile 'es.lombrinus.projects.mods:AJCast:1.0' // if you want chromecast
 
 ### Main Interface
 Tiene como interface principal AJCPlayer que define los métodos:
-```java
+<details>
+   <summary>AJCPlayer.java (Click to expand)</summary>
+   ```java
     /**
      * 
      * Play content from asset url
@@ -116,6 +118,8 @@ Tiene como interface principal AJCPlayer que define los métodos:
     int getCurrentPosition();
 }
 ```
+ </details>
+
 * **play(Asset, boolean autoplay):** Inicia la reproducción del asset pasado por parámetro. Autoplay define si se desea comenzar la reproducción automáticamente o no.
 * **play(Asset, int starPosition):** Inicia la reproducción del asset pasado por parámetro. StartPosition define la posición en milisegundos en la que se desea empezar la reproducción
 * **play():** Reanuda la reproducción en curso
