@@ -166,7 +166,7 @@ En el proyecto de ejemplo se utiliza [Dagger](http://square.github.io/dagger/) p
 AJCPlayer videoPlayer = new VideoPlayer(context, new MediaPlayer());
 ```
 
-### Controles y eventos
+### Añadir Controles y eventos
 Cómo vimos antes, AJCPlayer define un método para añadir implementaciones de PlayerEventListener a nuestro reproductor. Estas implementaciones se ejecutaran conforme el estado de nuestra reproducción cambie, por ejemplo si se pausa se lanzara el evento de pause en todos sus listeners.
 ```java
 public interface PlayerEventListener {
@@ -178,3 +178,35 @@ public interface PlayerEventListener {
     void onForward(Asset asset, int currentPosition);
 }
 ```
+Por lo tanto, lo que tenemos que hacer antes de comenzar a reproducir es añadir los eventos que deseemos. En la librería ya tenemos algunos creados que podemos usar:
+
+* **VideoControlBarManager:**  Implementación para Video en la que se envía el SurfaceHolder dónde el video será mostrado.
+
+```java
+final VideoPlayerView videoPlayerView = new VideoPlayerView(mFrameLayout, surfaceHolder, current, duration, seekBar, controller);
+final VideoPlayerOptions options = new VideoPlayerOptions(ActivityInfo.SCREEN_ORIENTATION_SENSOR, true, true, true);
+final Controls controls = new Controls(plays, pauses, stops);
+controlBarManager = new VideoControlBarManager(this, controls, this, this, videoPlayerView, options);
+videoPlayer.addEventListener(controlBarManager);
+```
+<details>
+<summary>Ver más sobre VideoControlBarManager</summary>
+* Context. Necesario para corregir algunos problemas de acceso a las vistas cuando no estamos en el hilo principal.
+* Controls. Lista de controles (play, pause, stop)
+* LoadingView.  Interface que define los métodos showLoading() y hideLoading() para que sea desde nuestra aplicación dónde incluyamos el "Cargando" cómo y dónde queramos, si es que lo queremos mostrar.
+* OnDoubleClick. Listener que avisa a nuestra aplicación cuando se haga doble click sobre el video.
+* VideoPlayerView.  Elementos de nuestra vista que se modificaran automáticamente según el estado de la reproducción. Aquí viene incluido el SurfaceHolder.
+* VideoPlayerOptions. Opciones del reproductor.
+ ```java
+ /** Type of orientation. To allow rotation */
+ public final Integer mScreenOrientation;
+ /** Auto Hide Status Bar during playing */
+ public final Boolean mHideStatusBar;
+ /** Auto hide Navigation bar during playing */
+ public final Boolean mHideNavigationBar;
+ /** if true video dimensions change depends on the screen */
+ public final Boolean mFullscreen;
+ ```
+</details>
+
+* **SubtitleManager** Implementación para detectar y mostrar los subtitulos.
