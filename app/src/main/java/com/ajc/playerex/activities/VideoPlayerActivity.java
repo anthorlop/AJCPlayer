@@ -56,8 +56,6 @@ public class VideoPlayerActivity extends AppCompatActivity
     @Inject
     AJCPlayer videoPlayer;
     @Inject
-    AJCNotification mNotification;
-    @Inject
     AJCast mChromeCast;
 
     private String mImageNotification;
