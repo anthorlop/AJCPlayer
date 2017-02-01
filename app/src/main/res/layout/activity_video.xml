@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context=".main.MainActivity"
+    android:background="@android:color/black"
+    style="@style/AppThemeFullScreen">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttons">
+
+        <FrameLayout
+            android:id="@+id/videoSurfaceContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true">
+            <com.google.android.exoplayer.AspectRatioFrameLayout
+                android:id="@+id/video_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+                <SurfaceView
+                    android:id="@+id/videoSurface"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+            </com.google.android.exoplayer.AspectRatioFrameLayout>
+
+        </FrameLayout>
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbar_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/chromeCastView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/chromcast_bg"
+        android:layout_above="@+id/buttons"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/layTextChromeCast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conectado con chromecast"
+                android:textSize="20dp"
+                android:textColor="@color/colorAccent"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mr_ic_media_route_on_holo_light"/>
+        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBarChromeCast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layTextChromeCast"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/audioPlayerTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentTop="true">
+        <include layout="@layout/video_player_top" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/audioPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentBottom="true">
+            <include layout="@layout/video_player" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/subtitlesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/subtitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Sutitulos"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:shadowColor="@android:color/black"
+            android:shadowRadius="12"
+            android:layout_marginBottom="5dp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

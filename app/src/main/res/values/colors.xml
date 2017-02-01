@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F56B0C</color>
+    <color name="colorPrimaryDark">#F56B0C</color>
+    <color name="colorAccent">#F56B0C</color>
+
+    <color name="player_bg">#88000000</color>
+
+    <color name="notification_icon">#F56B0C</color>
+    <color name="notification_play">#F56B0C</color>
+    <color name="notification_pause">#F56B0C</color>
+    <color name="notification_stop">#F56B0C</color>
+    <color name="notification_bg">#AA000000</color>
+    <color name="notification_text">#FFFFFF</color>
+
+    <color name="player_background_black">#D9FFFFFF</color>
+    <color name="player_buffering_black">#AAFF8806</color>
+    <color name="player_played_yellow">#F56B0C</color>
+
+    <color name="chromcast_bg">#242424</color>
+    <color name="main_bg">#F2F2F2</color>
+
+</resources>

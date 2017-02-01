@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="56dp"
+    android:background="@color/player_bg">
+
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@mipmap/ic_play_control"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+        <ImageView
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@mipmap/ic_pause_control"
+            android:visibility="gone"
+            android:layout_alignTop="@+id/button"
+            android:layout_toRightOf="@+id/button"/>
+
+        <ImageView
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@mipmap/ic_stop_control"
+            android:visibility="gone"
+            android:layout_alignTop="@+id/button2"
+            android:layout_toRightOf="@+id/button2"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/buttonFullscreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:src="@mipmap/ic_fullscreen_on"/>
+
+        <RelativeLayout
+            android:id="@+id/seekBarLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/buttonFullscreen"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="-"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"
+                android:layout_marginRight="8dp"/>
+
+            <TextView
+                android:id="@+id/separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/duration"
+                android:text="/"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"/>
+
+            <TextView
+                android:id="@+id/actualPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"
+                android:layout_toLeftOf="@id/separator"/>
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                style="?android:attr/seekBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:thumb="@mipmap/seekbar_marker"
+                android:layout_toLeftOf="@id/actualPosition"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

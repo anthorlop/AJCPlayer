@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/main_bg"
+    tools:context=".main.MainActivity">
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Audio Player 1"
+        android:id="@+id/button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Audio Player 2"
+        android:id="@+id/button2"
+        android:layout_toRightOf="@id/button"
+        android:layout_marginLeft="8dp"/>
+
+    <es.lombrinus.projects.mods.chromecastlib.CustomMediaRouteButton
+        android:id="@+id/media_route_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/button" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver video"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/buttonVideoUrl"
+        android:layout_below="@id/media_route_btn"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"/>
+
+    <EditText
+        android:id="@+id/urlVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/media_route_btn"
+        android:layout_toLeftOf="@id/buttonVideoUrl"
+        android:text="@string/url_default_video"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+    style="?android:attr/buttonStyleSmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Abrir Lista Videos"
+    android:id="@+id/buttonListVideo"
+    android:layout_below="@id/urlVideo"
+    android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar Videos Local"
+        android:id="@+id/buttonSelectVideo"
+        android:layout_below="@id/buttonListVideo"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/textoMensaje"
+        android:layout_below="@id/buttonSelectVideo"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="8dp"/>
+
+
+
+</RelativeLayout>

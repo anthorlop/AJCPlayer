@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">AJCPlayer Example</string>
+
+    <string name="cast_id">18E11325</string>
+    <string name="play_video">Play Video</string>
+    <string name="pause_video">Pause Video</string>
+    <string name="resume_video">Resume Video</string>
+
+    <!-- SAMPLES -->
+    <!-- HLS -->
+    <!-- https://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8 -->
+    <!-- http://tests-hlsvod.pre.lvlt.rtve.es/proxy/scd/test_hls_dobleaudio_mp4split.ism/video.m3u8?hls_client_manifest_version=4&amp;hls_no_audio_only -->
+    <!-- http://sample.vodobox.com/planete_interdite/planete_interdite_alternate.m3u8 -->
+    <!-- DASH -->
+    <!-- http://yt-dash-mse-test.commondatastorage.googleapis.com/media/car-20120827-manifest.mpd (Unsupported media rate) -->
+    <!-- http://yt-dash-mse-test.commondatastorage.googleapis.com/media/feelings_vp9-20130806-manifest.mpd (OK) -->
+    <string name="url_default_video">http://yt-dash-mse-test.commondatastorage.googleapis.com/media/feelings_vp9-20130806-manifest.mpd</string>
+
+    <string name="url_video_list_mp4">http://techslides.com/demos/sample-videos/small.mp4</string>
+    <string name="url_video_list_mpd">http://yt-dash-mse-test.commondatastorage.googleapis.com/media/feelings_vp9-20130806-manifest.mpd</string>
+    <string name="url_video_list_hls">http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8</string>
+</resources>
