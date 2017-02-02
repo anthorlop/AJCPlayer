@@ -205,3 +205,25 @@ _____
 final SubtitleManager subtitleManager = new SubtitleManager(activity, urlVtt, new OnSubtitleDetect(){...});
 videoPlayer.addEventListener(subtitleManager);
 ```
+_____
+
+ * **NotificationPlayerManager** Implementation to launch automatically a notification from which user could pause, play or stop player.
+```java
+// small notification view
+RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.audio_player_notification_little);
+// big notification view
+RemoteViews bigContentView = new RemoteViews(getPackageName(), R.layout.audio_player_notification);
+ 
+// set views
+PlayerNotificationControls notifControls = new PlayerNotificationControls(
+        R.mipmap.ic_audio_small_icon, contentView, bigContentView,
+        R.id.play_icon, R.id.pause_icon, R.id.stop_icon, R.id.progressbar_player);
+ 
+// AJCNotification audioNotification = new PlayerNotification(context, audioPlayer);
+audioPlayer.addEventListener(new NotificationPlayerManager(notifConfig, audioNotification, new NotificationCallback(){...));
+```
+NotificationCallback interface methods:
+```java
+RemoteViews notificationChange(Notification notification, int notificationId, RemoteViews remoteViews);
+void notificationViewClicked(int viewId);
+```
