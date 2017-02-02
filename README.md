@@ -71,15 +71,15 @@ Asset asset = new Asset(idString, urlString, ContentType.VIDEO);
 videoPlayer.play(asset, true); // autoplay=true
 ```
 _____
-## Resumen
-- Add dependencies to build.gradle
-- Instanciate AJCPlayer using VideoPlayer or AudioPlayer. (you can use Dagger optionally)
-- Create the player Layout. (Play, pause, stop buttons. ProgressBar, Seekbar, TextView to show position or duration and SurfaceView to show video ...)
-- Get Views in our Activity to set onclick events. (f.e.: Pause click should call to AJCPlayer Pause method)
-- Get Views in our Activity to send as param in VideoControlBarManager constructor. Although we have set buttons onclick events we have to send it to Player which will work with them to hide/show if playback state change. 
-- Add PlayEventListener to player (VideoControlBarManager, NotificationPlayerManager, SubtitleManager). You can create new implementations.
-- Create Asset with video ID, video URL and Content Type (Video/audio).
-- Call AJCPlayer play(Asset..., true) method to play content.
+## Summary. Step to Step
+1. Add dependencies to build.gradle
+2. Instanciate AJCPlayer using VideoPlayer or AudioPlayer. (you can use Dagger optionally)
+3. Create the activity Layout with FrameLayout, com.google.android.exoplayer.AspectRatioFrameLayout and SurfaceView.
+4. Load surfaceHolder and setCallback. When 'onSurfaceCreated' method is called we can play video.
+5. Get Views in our Activity to set onclick events. (f.e.: Pause click should call to AJCPlayer Pause method)
+6. Get Views in our Activity to send as param in VideoControlBarManager constructor. Although we have set buttons onclick events we have to send it to Player which will work with them to hide/show if playback state change. 
+7. Add PlayEventListener to player (VideoControlBarManager, NotificationPlayerManager, SubtitleManager). You can create new implementations.
+8. Create Asset with video ID, video URL and Content Type (Video/audio) and call AJCPlayer play(Asset..., true) method to play content.
 
 ## Imágenes
 
