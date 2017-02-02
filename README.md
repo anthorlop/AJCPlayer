@@ -89,7 +89,7 @@ _____
 
 ### Video MP4 / HLS / DASH inside ScrollView
 <details>
-   <summary>Ver/Ocultar imágenes</summary>
+   <summary>Show/Hide images</summary>
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/02.png" width="280"/>
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/03.png" width="280"/>
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/05.png" width="280"/>
@@ -146,14 +146,8 @@ AJCPlayer has two implementations (AudioPlayer and VideoPlayer).
 The sample project use [Dagger](http://square.github.io/dagger/) to view inyection. (It is not necessary to use Dagger)
 If you decide to use Dagger it will be necessary to do a Build Project.
 
-<details>
-   <summary>Show in Spanish</summary>
-En el proyecto de ejemplo se utiliza [Dagger](http://square.github.io/dagger/) para inyección de dependencias. (No es necesario usar Dagger)
-Si decides usar Dagger será necesario hacer un Build Project la primera vez.
-</details>
-
-You can check the example code:
-[PlayerComponent.java](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/di/PlayerComponent.java). [ExampleApp](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/app/ExampleApp.java)
+You can check the project code:
+[PlayerComponent.java](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/di/PlayerComponent.java) and [ExampleApp.java](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/app/ExampleApp.java)
 
 Without Dagger:
 ```java
@@ -161,7 +155,9 @@ AJCPlayer videoPlayer = new VideoPlayer(context, new MediaPlayer());
 ```
 
 ### Add Controls and events
-Cómo vimos antes, AJCPlayer define un método para añadir implementaciones de PlayerEventListener a nuestro reproductor. Estas implementaciones se ejecutaran conforme el estado de nuestra reproducción cambie, por ejemplo si se pausa se lanzara el evento de pause en todos sus listeners.
+As we saw before, AJCPlayer defines a method to add implementations of PlayerEventListener to our player. These implementations will be executed from the library when the state of our player changes, for example if the content is paused, the pause event will be thrown in all its listeners.
+
+PlayerEventListener interface:
 ```java
 public interface PlayerEventListener {
     void onPreparing(Asset asset, MediaPlayer mediaPlayer);
@@ -172,9 +168,9 @@ public interface PlayerEventListener {
     void onForward(Asset asset, int currentPosition);
 }
 ```
-Por lo tanto, lo que tenemos que hacer antes de comenzar a reproducir es añadir los eventos que deseemos. En la librería ya tenemos algunos creados que podemos usar:
+Then, we have to add listeners before play content. There are some listeners already created that we can use:
 
- * **VideoControlBarManager:**  Implementación para Video en la que se envía el SurfaceHolder dónde el video será mostrado.
+ * **VideoControlBarManager:**  Video implementation.
 
 ```java
 final VideoPlayerView videoPlayerView = new VideoPlayerView(mFrameLayout, surfaceHolder, current, duration, seekBar, controller);
@@ -184,13 +180,13 @@ controlBarManager = new VideoControlBarManager(context, controls, new LoadingVie
 videoPlayer.addEventListener(controlBarManager);
 ```
 <details>
-<summary>Ver más sobre VideoControlBarManager</summary>
-* **Context:** Necesario para corregir algunos problemas de acceso a las vistas cuando no estamos en el hilo principal.
-* **Controls:** Lista de controles (play, pause, stop)
-* **LoadingView:**  Interface que define los métodos showLoading() y hideLoading() para que sea desde nuestra aplicación dónde incluyamos el "Cargando" cómo y dónde queramos, si es que lo queremos mostrar.
-* **OnDoubleClick:** Listener que avisa a nuestra aplicación cuando se haga doble click sobre el video.
-* **VideoPlayerView:**  Elementos de nuestra vista que se modificaran automáticamente según el estado de la reproducción. Aquí viene incluido el SurfaceHolder.
-* **VideoPlayerOptions:** Opciones del reproductor.
+<summary>Show more</summary>
+* **Context:** Context
+* **Controls:** List of Views (play, pause, stop)
+* **LoadingView:**  Interface to define showLoading() and hideLoading() methods where loading progressBar can be show or hide.
+* **OnDoubleClick:** Listener to notify duoble click.
+* **VideoPlayerView:**  Elements of the view. Here is where we have to send SurfaceHolder.
+* **VideoPlayerOptions:** Player options.
  ```java
  /** Type of orientation. To allow rotation */
  public final Integer mScreenOrientation;
@@ -204,7 +200,7 @@ videoPlayer.addEventListener(controlBarManager);
 </details>
 _____
 
- * **SubtitleManager** Implementación para detectar y mostrar los subtitulos.
+ * **SubtitleManager** Implementation to detect and send subtitles that we should to show.
 ```java
 final SubtitleManager subtitleManager = new SubtitleManager(activity, urlVtt, new OnSubtitleDetect(){...});
 videoPlayer.addEventListener(subtitleManager);
