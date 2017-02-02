@@ -37,7 +37,7 @@ In activity layout:
 Activity class:
 Create an instance of AudioPlayer or VideoPlayer:
 ```java
-AJCPlayer videoPlayer = new VideoPlayer(context, new MediaPlayer());
+AJCPlayer videoPlayer = new VideoPlayer(this, new MediaPlayer());
 ```
 If you are playing video you have to load SurfaceHolder:
 ```java
