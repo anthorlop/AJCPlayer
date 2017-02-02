@@ -1,5 +1,5 @@
 # AJCPlayer
-Audio and Video Player for Android with HLS and DASH support
+Audio and Video Player for Android with HLS and DASH support. Based on ExoPlayer
 
 ## Simple code
 ```gradle
