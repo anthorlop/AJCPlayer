@@ -1,6 +1,74 @@
 # AJCPlayer
 Audio and Video Player for Android with HLS and DASH support
 
+## Simple code
+```gradle
+
+repositories {
+    maven { url 'https://github.com/anthorlop/mvn-android/raw/master/' }
+}
+
+// AJCPlayer dependencies
+compile 'es.lombrinus.projects.mods:AJCPlayer:1.0'
+compile 'es.lombrinus.projects.mods:AJCNotification:1.0' // if you want notifications
+compile 'es.lombrinus.projects.mods:AJCast:1.0' // if you want chromecast
+```
+```xml
+<FrameLayout
+    android:id="@+id/videoSurfaceContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true">
+    <com.google.android.exoplayer.AspectRatioFrameLayout
+        android:id="@+id/video_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+        <SurfaceView
+            android:id="@+id/videoSurface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </com.google.android.exoplayer.AspectRatioFrameLayout>
+</FrameLayout>
+```
+Activity class:
+Create an instance of AudioPlayer or VideoPlayer:
+```java
+AJCPlayer videoPlayer = new VideoPlayer(context, new MediaPlayer());
+```
+If you are playing video you have to load SurfaceHolder:
+```java
+// load SurfaceHolder
+SurfaceHolder holder = mSurfaceView.getHolder();
+DisplayMetrics metrics = new DisplayMetrics();
+this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+holder.setFixedSize(metrics.widthPixels, (int) ((float) metrics.widthPixels / (float) 16 / (float) 9));
+holder.addCallback(this);
+```
+And your activity have to implement SurfaceHolder.Callback. You can play video on surfaceCreated(...) method: 
+```java
+// views you want to hide automatically when content is playing
+View viewBot = findViewById(R.id.audioPlayerLayoutBottom);
+View viewTop = findViewById(R.id.audioPlayerLayoutTop);
+CList viewsToHide = new CList(viewBot, viewTop);
+
+// we send FrameLayout as param because AJCPlayer use this view to detect click and double click
+FrameLayout mFrameLayout = (FrameLayout) findViewById(R.id.videoSurfaceContainer);
+        
+final VideoPlayerView videoPlayerView = new VideoPlayerView(mFrameLayout, surfaceHolder, currentPositionTextView, durationTextView, seekBar, viewsToHide); // you could send currentPosition, duration or seekbar views as null
+
+final VideoPlayerOptions options = new VideoPlayerOptions(ActivityInfo.SCREEN_ORIENTATION_SENSOR, true, true, true);
+final Controls controls = new Controls(plays, pauses, stops);
+controlBarManager = new VideoControlBarManager(context, controls, new LoadingView(){...}, new OnDoubleClick{...}, videoPlayerView, options); //LoadingView you can hide/show your progress bar. LoadingView and OnDoubleClick could be null
+videoPlayer.addEventListener(controlBarManager);
+```
+Create Asset and Play video
+```java
+Asset asset = new Asset(idString, urlString, ContentType.VIDEO);
+videoPlayer.play(asset, true); // autoplay=true
+```
+_____
 ## Resumen
 - Add dependencies to build.gradle
 - Instanciate AJCPlayer using VideoPlayer or AudioPlayer. (you can use Dagger optionally)
@@ -169,12 +237,6 @@ Tiene como interface principal AJCPlayer que define los métodos:
 
 ### Integración
 AJCPlayer tiene dos implementaciones (AudioPlayer y VideoPlayer).
-
-El constructor de ambas clases será el siguiente:
-```java
-VideoPlayer(Context context, MediaPlayer mediaPlayer)...
-AudioPlayer(Context context, MediaPlayer mediaPlayer)...
-```
 
 En el proyecto de ejemplo se utiliza [Dagger](http://square.github.io/dagger/) para inyección de dependencias. Para ello se ha creado el componente [PlayerComponent.java](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/di/PlayerComponent.java). Será necesario hacer un Build Project la primera vez para que la clase [ExampleApp](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/app/ExampleApp.java) no de error. No es necesario usar Dagger, si decides no usarlo no necesitaras crear nada de esto y puedes crear una instancia de la clase VideoPlayer o AudioPlayer directamente:
 ```java
