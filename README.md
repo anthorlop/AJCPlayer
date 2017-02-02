@@ -180,7 +180,7 @@ public interface PlayerEventListener {
 ```
 Por lo tanto, lo que tenemos que hacer antes de comenzar a reproducir es añadir los eventos que deseemos. En la librería ya tenemos algunos creados que podemos usar:
 
-* **VideoControlBarManager:**  Implementación para Video en la que se envía el SurfaceHolder dónde el video será mostrado.
+ * **VideoControlBarManager:**  Implementación para Video en la que se envía el SurfaceHolder dónde el video será mostrado.
 
 ```java
 final VideoPlayerView videoPlayerView = new VideoPlayerView(mFrameLayout, surfaceHolder, current, duration, seekBar, controller);
@@ -209,4 +209,9 @@ videoPlayer.addEventListener(controlBarManager);
  ```
 </details>
 
-* **SubtitleManager** Implementación para detectar y mostrar los subtitulos.
+
+ * **SubtitleManager** Implementación para detectar y mostrar los subtitulos.
+```java
+final SubtitleManager subtitleManager = new SubtitleManager(ctx, "http://...vtt", this);
+videoPlayer.addEventListener(subtitleManager);
+```
