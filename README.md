@@ -13,6 +13,8 @@ compile 'es.lombrinus.projects.mods:AJCPlayer:1.0'
 compile 'es.lombrinus.projects.mods:AJCNotification:1.0' // if you want notifications
 compile 'es.lombrinus.projects.mods:AJCast:1.0' // if you want chromecast
 ```
+
+In activity layout:
 ```xml
 <FrameLayout
     android:id="@+id/videoSurfaceContainer"
