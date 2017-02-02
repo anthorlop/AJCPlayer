@@ -200,6 +200,10 @@ videoPlayer.addEventListener(controlBarManager);
 </details>
 _____
 
+ * **PlayerControlBarManager:**  Audio implementation. Similar to video.
+ 
+_____
+
  * **SubtitleManager** Implementation to detect and send subtitles that we should to show.
 ```java
 final SubtitleManager subtitleManager = new SubtitleManager(activity, urlVtt, new OnSubtitleDetect(){...});
