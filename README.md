@@ -48,14 +48,14 @@ this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 holder.setFixedSize(metrics.widthPixels, (int) ((float) metrics.widthPixels / (float) 16 / (float) 9));
 holder.addCallback(this);
 ```
-And your activity have to implement SurfaceHolder.Callback. You can play video on surfaceCreated(...) method: 
+And your activity has to implement SurfaceHolder.Callback. You can play video on surfaceCreated(...) method: 
 ```java
 // views you want to hide automatically when content is playing
 View viewBot = findViewById(R.id.audioPlayerLayoutBottom);
 View viewTop = findViewById(R.id.audioPlayerLayoutTop);
 CList viewsToHide = new CList(viewBot, viewTop);
 
-// we send FrameLayout as param because AJCPlayer use this view to detect click and double click
+// we send FrameLayout as param because AJCPlayer uses this view to detect click and double click
 FrameLayout mFrameLayout = (FrameLayout) findViewById(R.id.videoSurfaceContainer);
         
 final VideoPlayerView videoPlayerView = new VideoPlayerView(mFrameLayout, surfaceHolder, currentPositionTextView, durationTextView, seekBar, viewsToHide); // you could send currentPosition, duration or seekbar views as null
@@ -73,7 +73,7 @@ videoPlayer.play(asset, true); // autoplay=true
 _____
 ## Summary. Step to Step
 1. Add dependencies to build.gradle
-2. Instanciate AJCPlayer using VideoPlayer or AudioPlayer. (you can use Dagger optionally)
+2. In order to use AJCPlayer yo have to instantiate VideoPlayer or AudioPlayer. (you can use Dagger optionally)
 3. Create the activity Layout with FrameLayout, com.google.android.exoplayer.AspectRatioFrameLayout and SurfaceView.
 4. Load surfaceHolder and setCallback. When 'onSurfaceCreated' method is called we can play video.
 5. Get Views in our Activity to set onclick events. (f.e.: Pause click should call to AJCPlayer Pause method)
@@ -81,26 +81,29 @@ _____
 7. Add PlayEventListener to player (VideoControlBarManager, NotificationPlayerManager, SubtitleManager). You can create new implementations.
 8. Create Asset with video ID, video URL and Content Type (Video/audio) and call AJCPlayer play(Asset..., true) method to play content.
 
-## Imágenes
+## Images
 
 ### Fullscreen DASH / HLS
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/01.png" width="425"/> 
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/04.png" width="425"/>
 
-### Video MP4 / HLS / DASH en ScrollView
+### Video MP4 / HLS / DASH inside ScrollView
 <details>
    <summary>Ver/Ocultar imágenes</summary>
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/02.png" width="280"/>
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/03.png" width="280"/>
 <img src="https://github.com/anthorlop/AJCPlayer/blob/develop/ScreenShots/05.png" width="280"/>
 </details>
-## Descripción
+## Description
+The purpose of this library is to decouple the video player and audio from the applications allowing to customize the view of the player from your application.
+<details>
+   <summary>Show in spanish</summary>
 El objetivo de esta librería es desacoplar el reproductor de vídeo y audio de las aplicaciones permitiendo personalizar desde tu aplicación la vista del reproductor.
+</details>
+## Instructions
 
-## Instrucciones
-
-### Dependencias
-Incluir en build.gradle:
+### Dependencies
+Include in 'build.gradle' file:
 ```gradle
 
 repositories {
@@ -114,45 +117,24 @@ compile 'es.lombrinus.projects.mods:AJCast:1.0' // if you want chromecast
 ```
 
 ### Main Interface
-Tiene como interface principal AJCPlayer que define los métodos:
+AJCPlayer is the main interface.
 <details>
-   <summary>AJCPlayer.java (Click to expand)</summary>
-   ```java
-    /**
-     * 
-     * Play content from asset url
-     * 
-     * @param asset contains url to play and contentType video or audio
-     * @param autoPlay to start content automatically
-     */
-    void play(Asset asset, boolean autoPlay);
-
-    /**
-     *
-     * Play content from asset url
-     *
-     * @param asset contains url to play and contentType video or audio
-     * @param position to start content from a specified position
-     */
-    void play(Asset asset, int position);
-
-    /**
-     * Play content previously loaded / resume
-     */
-    void play();
-
-    /**
-     *
-     * Set options to play content (forceMediaPlayer, contentTypes list)
-     *
-     * @param settings options class
-     */
-    void setOptions(PlaybackSettings settings);
-
-    /**
-     * Check if content is currently playing
-     * 
-     * @return true or false
+   <summary>AJCPlayer methods (Click to expand)</summary>
+* **play(Asset, boolean autoplay):** Play content from asset (url). You can start content automatically.
+* **play(Asset, int starPosition):** Play content from asset (url). You can start content from a specified position.
+* **play():** Play content previously loaded / resume
+* **setOptions(PlaybackSettings settings)** Set options to play content. For example force Player to use MediaPlayer or add ContentTypes to determine if loaded content is DASH or HLS). Not required.
+* **isPlaying():** Check if content is currently playing
+* **isLoading():** Check if content is loading
+* **pause(Asset asset):** To pause current content
+* **release(Asset asset):** To reset player process
+* **addEventListener(PlayerEventListener):** Add listener to a list. Events will be called from player to notify every change of the state
+* **isPaused():** Check if content is currently paused
+* **onViewSizeChanged():** Notify a dimension change
+* **seekTo(position):** Seek to a position
+* **removeEventListener(listener):** Remove listener from the list of listeners
+* **clearEventListeners():** Clear the list of listeners
+* **getCurrentPosition():** Get current position
      */
     boolean isPlaying();
 
@@ -218,22 +200,7 @@ Tiene como interface principal AJCPlayer que define los métodos:
 ```
  </details>
 
-* **play(Asset, boolean autoplay):** Inicia la reproducción del asset pasado por parámetro. Autoplay define si se desea comenzar la reproducción automáticamente o no.
-* **play(Asset, int starPosition):** Inicia la reproducción del asset pasado por parámetro. StartPosition define la posición en milisegundos en la que se desea empezar la reproducción
-* **play():** Reanuda la reproducción en curso
-* **setOptions(PlaybackSettings settings)** Permite configurar una serie de opciones. (forzar MediaPlayer o añadir ContentTypes que determinarán si el contenido es Dash o HLS). No es necesario usarlo, pero se ofrece la opción.
-* **isPlaying():** TRUE si la reproducción está en curso o FALSE si está pausada.
-* **isLoading():** TRUE si la reproducción está preparándose o FALSE si ya ha iniciado.
-* **pause(Asset asset):** Pausa la reproducción.
-* **release(Asset asset):** Detiene la reproducción.
-* **addEventListener(PlayerEventListener):** Añade un escuchador de eventos para interactuar con cualquier componente que queramos acoplarle, más tarde veremos un ejemplo con las Notificaciones.
-* **isPaused():** Comprueba si esta pausada la reproducción
-* **onViewSizeChanged():** Informa al player de un cambio para que actualice las dimensiones del Video.
-* **seekTo(position):** Continuar la reproducción por la posición indicada en milisegundos..
-* **removeEventListener(listener):** Elimina el listener pasado por párametro.
-* **clearEventListeners():** Elimina todos los listeners.
-* **getUrlResolved():** Obtener la URL final del contenido.
-* **getCurrentPosition():** Obtener la posición actual de la reproducción.
+
 
 ## Uso del módulo
 
