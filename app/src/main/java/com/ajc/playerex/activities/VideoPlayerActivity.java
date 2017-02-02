@@ -159,6 +159,8 @@ public class VideoPlayerActivity extends AppCompatActivity
 
         }
 
+        initChromecast();
+
     }
 
     @Override
@@ -168,7 +170,7 @@ public class VideoPlayerActivity extends AppCompatActivity
             videoPlayer.release();
         }
 
-        // mChromeCast.stop();
+        //mChromeCast.stop();
 
         super.onDestroy();
     }
@@ -256,14 +258,14 @@ public class VideoPlayerActivity extends AppCompatActivity
         final VideoPlayerView videoPlayerView = new VideoPlayerView(mFrameLayout, surfaceHolder, current, duration, seekBar, controller);
         final VideoPlayerOptions options = new VideoPlayerOptions(ActivityInfo.SCREEN_ORIENTATION_SENSOR, true, true, true);
         final Controls controls = new Controls(plays, pauses, stops);
-        controlBarManager = new VideoControlBarManager(this, controls, this, this, videoPlayerView, options);
+        controlBarManager = new VideoControlBarManager(this, controls, this, videoPlayerView, options);
 
         if (!fullScreen) {
 
             videoPlayer.addEventListener(new PlayerStatsManager());
 
-            final SubtitleManager subtitleManager = new SubtitleManager(this, this);
-            videoPlayer.addEventListener(subtitleManager);
+            // final SubtitleManager subtitleManager = new SubtitleManager(this, "http://...vtt", this);
+            // videoPlayer.addEventListener(subtitleManager);
         }
 
         videoPlayer.addEventListener(controlBarManager);
@@ -363,7 +365,7 @@ public class VideoPlayerActivity extends AppCompatActivity
     }
 
     @Override
-    public void enableSubtitles(boolean enable) {
+    public void enableSubtitles(boolean enable, String vttSubtitle) {
 
         subtitlesChecked = true;
 
@@ -376,8 +378,6 @@ public class VideoPlayerActivity extends AppCompatActivity
             subtitleEnabled = false;
             subtitlesBtn.setVisibility(View.GONE);
         }
-
-        initChromecast();
     }
 
     private void initChromecast() {

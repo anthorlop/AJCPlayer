@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AJCPlayer Example</string>
 
-    <string name="cast_id">18E11325</string>
+    <string name="cast_id">145D1C4B</string>
     <string name="play_video">Play Video</string>
     <string name="pause_video">Pause Video</string>
     <string name="resume_video">Resume Video</string>
