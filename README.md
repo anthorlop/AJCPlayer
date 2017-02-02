@@ -120,6 +120,7 @@ compile 'es.lombrinus.projects.mods:AJCast:1.0' // if you want chromecast
 AJCPlayer is the main interface.
 <details>
    <summary>AJCPlayer methods (Click to expand)</summary>
+   
 * **play(Asset, boolean autoplay):** Play content from asset (url). You can start content automatically.
 * **play(Asset, int starPosition):** Play content from asset (url). You can start content from a specified position.
 * **play():** Play content previously loaded / resume
@@ -135,84 +136,31 @@ AJCPlayer is the main interface.
 * **removeEventListener(listener):** Remove listener from the list of listeners
 * **clearEventListeners():** Clear the list of listeners
 * **getCurrentPosition():** Get current position
-     */
-    boolean isPlaying();
-
-    /**
-     * Check if content is currently paused
-     *
-     * @return true or false
-     */
-    boolean isPaused();
-
-    /**
-     * Check if content is loading
-     *
-     * @return true or false
-     */
-    boolean isLoading();
-
-    /**
-     * To pause current content
-     */
-    void pause();
-
-    /**
-     * To reset player process
-     */
-    void release();
-
-    /**
-     * Notify a dimension change
-     */
-    void onViewSizeChanged();
-
-    /**
-     * Add listener to a list. Events will be called from player to notify every change of the state
-     */
-    void addEventListener(PlayerEventListener playerEventListener);
-
-    /**
-     * Remove listener from the list of listeners
-     * @param eventListenerClass event to remove
-     */
-    void removeEventListener(Class eventListenerClass);
-
-    /**
-     * Clear the list of listeners
-     */
-    void clearEventListeners();
-
-    /**
-     * Seek to a position
-     * 
-     * @param position position to seek
-     */
-    void seekTo(int position);
-
-    /**
-     * Get current position
-     * 
-     * @return current position
-     */
-    int getCurrentPosition();
-}
-```
  </details>
 
+## How to use
 
+### Integration
+AJCPlayer has two implementations (AudioPlayer and VideoPlayer).
 
-## Uso del módulo
+The sample project use [Dagger](http://square.github.io/dagger/) to view inyection. (It is not necessary to use Dagger)
+If you decide to use Dagger it will be necessary to do a Build Project.
 
-### Integración
-AJCPlayer tiene dos implementaciones (AudioPlayer y VideoPlayer).
+<details>
+   <summary>Show in Spanish</summary>
+En el proyecto de ejemplo se utiliza [Dagger](http://square.github.io/dagger/) para inyección de dependencias. (No es necesario usar Dagger)
+Si decides usar Dagger será necesario hacer un Build Project la primera vez.
+</details>
 
-En el proyecto de ejemplo se utiliza [Dagger](http://square.github.io/dagger/) para inyección de dependencias. Para ello se ha creado el componente [PlayerComponent.java](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/di/PlayerComponent.java). Será necesario hacer un Build Project la primera vez para que la clase [ExampleApp](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/app/ExampleApp.java) no de error. No es necesario usar Dagger, si decides no usarlo no necesitaras crear nada de esto y puedes crear una instancia de la clase VideoPlayer o AudioPlayer directamente:
+You can check the example code:
+[PlayerComponent.java](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/di/PlayerComponent.java). [ExampleApp](https://github.com/anthorlop/AJCPlayer/blob/master/app/src/main/java/com/ajc/playerex/app/ExampleApp.java)
+
+Without Dagger:
 ```java
 AJCPlayer videoPlayer = new VideoPlayer(context, new MediaPlayer());
 ```
 
-### Añadir Controles y eventos
+### Add Controls and events
 Cómo vimos antes, AJCPlayer define un método para añadir implementaciones de PlayerEventListener a nuestro reproductor. Estas implementaciones se ejecutaran conforme el estado de nuestra reproducción cambie, por ejemplo si se pausa se lanzara el evento de pause en todos sus listeners.
 ```java
 public interface PlayerEventListener {
