@@ -8,7 +8,7 @@ repositories {
     maven { url 'https://github.com/anthorlop/mvn-android/raw/master/' }
 }
 
-// AJCPlayer dependencies
+// AJCPlayer gradle dependencies
 compile 'es.lombrinus.projects.mods:AJCPlayer:1.0'
 compile 'es.lombrinus.projects.mods:AJCNotification:1.0' // if you want notifications
 compile 'es.lombrinus.projects.mods:AJCast:1.0' // if you want chromecast
