@@ -6,7 +6,7 @@ Audio and Video Player for Android with HLS and DASH support
 - Instanciate AJCPlayer using VideoPlayer or AudioPlayer. (you can use Dagger optionally)
 - Create the player Layout. (Play, pause, stop buttons. ProgressBar, Seekbar, TextView to show position or duration and SurfaceView to show video ...)
 - Get Views in our Activity to set onclick events. (f.e.: Pause click should call to AJCPlayer Pause method)
-- Get Views in our Activity to send as param in VideoControlBarManager constructor.
+- Get Views in our Activity to send as param in VideoControlBarManager constructor. Although we have set buttons onclick events we have to send it to Player which will work with them to hide/show if playback state change. 
 - Add PlayEventListener to player (VideoControlBarManager, NotificationPlayerManager, SubtitleManager). You can create new implementations.
 - Create Asset with video ID, video URL and Content Type (Video/audio).
 - Call AJCPlayer play(Asset..., true) method to play content.
