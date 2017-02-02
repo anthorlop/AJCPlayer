@@ -22,6 +22,11 @@ El objetivo de esta librería es desacoplar el reproductor de vídeo y audio de 
 ### Dependencias
 Incluir en build.gradle:
 ```gradle
+
+repositories {
+    maven { url 'https://github.com/anthorlop/mvn-android/raw/master/' }
+}
+
 // AJCPlayer dependencies
 compile 'es.lombrinus.projects.mods:AJCPlayer:1.0'
 compile 'es.lombrinus.projects.mods:AJCNotification:1.0' // if you want notifications
