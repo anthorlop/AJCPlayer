@@ -208,10 +208,10 @@ videoPlayer.addEventListener(controlBarManager);
  public final Boolean mFullscreen;
  ```
 </details>
-
+_____
 
  * **SubtitleManager** Implementación para detectar y mostrar los subtitulos.
 ```java
-final SubtitleManager subtitleManager = new SubtitleManager(ctx, "http://...vtt", this);
+final SubtitleManager subtitleManager = new SubtitleManager(activity, urlVtt, new OnSubtitleDetect(){...});
 videoPlayer.addEventListener(subtitleManager);
 ```
