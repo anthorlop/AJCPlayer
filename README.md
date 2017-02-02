@@ -186,17 +186,17 @@ Por lo tanto, lo que tenemos que hacer antes de comenzar a reproducir es añadir
 final VideoPlayerView videoPlayerView = new VideoPlayerView(mFrameLayout, surfaceHolder, current, duration, seekBar, controller);
 final VideoPlayerOptions options = new VideoPlayerOptions(ActivityInfo.SCREEN_ORIENTATION_SENSOR, true, true, true);
 final Controls controls = new Controls(plays, pauses, stops);
-controlBarManager = new VideoControlBarManager(this, controls, this, this, videoPlayerView, options);
+controlBarManager = new VideoControlBarManager(context, controls, new LoadingView(){...}, new OnDoubleClick{...}, videoPlayerView, options);
 videoPlayer.addEventListener(controlBarManager);
 ```
 <details>
 <summary>Ver más sobre VideoControlBarManager</summary>
-* Context. Necesario para corregir algunos problemas de acceso a las vistas cuando no estamos en el hilo principal.
-* Controls. Lista de controles (play, pause, stop)
-* LoadingView.  Interface que define los métodos showLoading() y hideLoading() para que sea desde nuestra aplicación dónde incluyamos el "Cargando" cómo y dónde queramos, si es que lo queremos mostrar.
-* OnDoubleClick. Listener que avisa a nuestra aplicación cuando se haga doble click sobre el video.
-* VideoPlayerView.  Elementos de nuestra vista que se modificaran automáticamente según el estado de la reproducción. Aquí viene incluido el SurfaceHolder.
-* VideoPlayerOptions. Opciones del reproductor.
+* **Context:** Necesario para corregir algunos problemas de acceso a las vistas cuando no estamos en el hilo principal.
+* **Controls:** Lista de controles (play, pause, stop)
+* **LoadingView:**  Interface que define los métodos showLoading() y hideLoading() para que sea desde nuestra aplicación dónde incluyamos el "Cargando" cómo y dónde queramos, si es que lo queremos mostrar.
+* **OnDoubleClick:** Listener que avisa a nuestra aplicación cuando se haga doble click sobre el video.
+* **VideoPlayerView:**  Elementos de nuestra vista que se modificaran automáticamente según el estado de la reproducción. Aquí viene incluido el SurfaceHolder.
+* **VideoPlayerOptions:** Opciones del reproductor.
  ```java
  /** Type of orientation. To allow rotation */
  public final Integer mScreenOrientation;
