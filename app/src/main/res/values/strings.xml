@@ -14,9 +14,9 @@
     <!-- DASH -->
     <!-- http://yt-dash-mse-test.commondatastorage.googleapis.com/media/car-20120827-manifest.mpd (Unsupported media rate) -->
     <!-- http://yt-dash-mse-test.commondatastorage.googleapis.com/media/feelings_vp9-20130806-manifest.mpd (OK) -->
-    <string name="url_default_video">http://yt-dash-mse-test.commondatastorage.googleapis.com/media/feelings_vp9-20130806-manifest.mpd</string>
+    <string name="url_default_video">http://www.html5videoplayer.net/videos/toystory.mp4</string>
 
-    <string name="url_video_list_mp4">http://techslides.com/demos/sample-videos/small.mp4</string>
+    <string name="url_video_list_mp4">http://www.html5videoplayer.net/videos/toystory.mp4</string>
     <string name="url_video_list_mpd">http://yt-dash-mse-test.commondatastorage.googleapis.com/media/feelings_vp9-20130806-manifest.mpd</string>
     <string name="url_video_list_hls">http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8</string>
 </resources>

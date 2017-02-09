@@ -3,6 +3,7 @@ package com.ajc.playerex.activities;
 import android.app.Notification;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -38,6 +39,7 @@ import es.lombrinus.projects.mods.playercore.audioplayer.model.Controls;
 import es.lombrinus.projects.mods.playercore.audioplayer.model.VideoPlayerOptions;
 import es.lombrinus.projects.mods.playercore.audioplayer.model.VideoPlayerView;
 import es.lombrinus.projects.mods.playercore.audioplayer.player.AJCPlayer;
+import es.lombrinus.projects.mods.playercore.audioplayer.player.VideoPlayer;
 import es.lombrinus.projects.mods.playercore.audioplayer.player.listeners.OnSubtitleDetect;
 import es.lombrinus.projects.mods.playercore.audioplayer.player.listeners.SubtitleManager;
 import es.lombrinus.projects.mods.playercore.audioplayer.player.listeners.VideoControlBarManager;
@@ -55,6 +57,7 @@ public class VideoPlayerActivity extends AppCompatActivity
 
     @Inject
     AJCPlayer videoPlayer;
+
     @Inject
     AJCast mChromeCast;
 
@@ -110,6 +113,9 @@ public class VideoPlayerActivity extends AppCompatActivity
             urlResolved = getIntent().getExtras().getString(VIDEO_URL);
             pathVideo = getIntent().getExtras().getString(VIDEO_PATH);
         }
+
+        if (!fullScreen)
+            videoPlayer = new VideoPlayer(this, new MediaPlayer());
 
         if (urlResolved == null) {
             if (pathVideo != null) {
@@ -426,8 +432,7 @@ public class VideoPlayerActivity extends AppCompatActivity
 
                                 if (autoPlay) {
                                     if (idVideo != null) {
-                                        Asset asset = new Asset(idVideo, idVideo, ContentType.VIDEO);
-
+                                        Asset asset = new Asset(idVideo, urlResolved, ContentType.VIDEO);
                                         videoPlayer.play(asset, mChromeCast.getCurrentPosition());
                                         //videoPlayer.seekTo(mChromeCast.getCurrentPosition());
                                     } else {
