@@ -23,9 +23,12 @@ android {
     }
 
     repositories {
-        maven { url 'https://github.com/anthorlop/mvn-android/raw/master/' }
+        maven { url 'https://github.com/anthorlop/mvn-android/raw/develop/' }
         jcenter()
         mavenCentral()
+        maven {
+            url 'https://maven.google.com'
+        }
     }
 
     buildTypes {
@@ -54,7 +57,7 @@ dependencies {
 
 
     // AJCPlayer dependencies
-    compile 'es.lombrinus.projects.mods:AJCPlayer:1.0'
+    compile 'es.lombrinus.projects.mods:AJCPlayer:1.0.1'
     compile 'es.lombrinus.projects.mods:AJCNotification:1.0'
     compile 'es.lombrinus.projects.mods:AJCast:1.0'
 

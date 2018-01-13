@@ -41,12 +41,14 @@ import es.lombrinus.projects.mods.playercore.audioplayer.model.VideoPlayerView;
 import es.lombrinus.projects.mods.playercore.audioplayer.player.AJCPlayer;
 import es.lombrinus.projects.mods.playercore.audioplayer.player.VideoPlayer;
 import es.lombrinus.projects.mods.playercore.audioplayer.player.listeners.OnSubtitleDetect;
+import es.lombrinus.projects.mods.playercore.audioplayer.player.listeners.PlayerControl;
+import es.lombrinus.projects.mods.playercore.audioplayer.player.listeners.PlayerEventListener;
 import es.lombrinus.projects.mods.playercore.audioplayer.player.listeners.SubtitleManager;
 import es.lombrinus.projects.mods.playercore.audioplayer.player.listeners.VideoControlBarManager;
 import es.lombrinus.projects.mods.playercore.audioplayer.view.LoadingView;
 
 public class VideoPlayerActivity extends AppCompatActivity
-        implements SurfaceHolder.Callback, LoadingView, OnSubtitleDetect, NotificationCallback {
+        implements SurfaceHolder.Callback, LoadingView, OnSubtitleDetect, NotificationCallback, PlayerEventListener {
 
     public static final String URL_VIDEO = "http://techslides.com/demos/sample-videos/small.mp4";
     public static String VIDEO_ID = "VideoId";
@@ -277,6 +279,8 @@ public class VideoPlayerActivity extends AppCompatActivity
         videoPlayer.addEventListener(controlBarManager);
         setButtonsActionClick(play, pause, stop);
 
+        videoPlayer.addEventListener(this);
+
         if (!fullScreen) {
             if (idVideo != null) {
 
@@ -481,5 +485,47 @@ public class VideoPlayerActivity extends AppCompatActivity
         if (load != null) {
             load.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onPreparing(Asset asset, PlayerControl playerControl) {
+
+    }
+
+    @Override
+    public void onPlayBegins(Asset asset, int i) {
+
+    }
+
+    @Override
+    public void onResume(Asset asset, int i) {
+
+    }
+
+    @Override
+    public void onCompletion(Asset asset) {
+
+    }
+
+    @Override
+    public void onPause(Asset asset, int i) {
+
+    }
+
+    @Override
+    public void onForward(Asset asset, int i) {
+
+    }
+
+    @Override
+    public void onError(Asset asset, String s) {
+        videoPlayer.release();
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    @Override
+    public void onConfigurationChanged() {
+
     }
 }
