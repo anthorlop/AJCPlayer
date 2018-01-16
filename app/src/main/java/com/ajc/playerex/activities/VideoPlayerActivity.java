@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -276,15 +277,16 @@ public class VideoPlayerActivity extends AppCompatActivity
             // videoPlayer.addEventListener(subtitleManager);
         }
 
+        videoPlayer.addEventListener(this);
+
         videoPlayer.addEventListener(controlBarManager);
         setButtonsActionClick(play, pause, stop);
-
-        videoPlayer.addEventListener(this);
 
         if (!fullScreen) {
             if (idVideo != null) {
 
                 Asset asset = new Asset(idVideo, urlResolved, ContentType.VIDEO);
+                asset.setLocalPath(!TextUtils.isEmpty(pathVideo));
 
                 if (currentPosition > 0) {
                     videoPlayer.play(asset, currentPosition);
@@ -292,8 +294,14 @@ public class VideoPlayerActivity extends AppCompatActivity
                     videoPlayer.play(asset, autoPlay);
                 }
             } else if (pathVideo != null) {
-                // TODO playLocal
-                //videoPlayer.playLocalPath(pathVideo, autoPlay);
+                Asset asset = new Asset("1", urlResolved, ContentType.VIDEO);
+                asset.setLocalPath(!TextUtils.isEmpty(pathVideo));
+
+                if (currentPosition > 0) {
+                    videoPlayer.play(asset, currentPosition);
+                } else {
+                    videoPlayer.play(asset, autoPlay);
+                }
             } else {
                 Toast.makeText(VideoPlayerActivity.this, "no video played", Toast.LENGTH_SHORT).show();
             }
@@ -487,6 +495,8 @@ public class VideoPlayerActivity extends AppCompatActivity
         }
     }
 
+    // Additional Actions
+
     @Override
     public void onPreparing(Asset asset, PlayerControl playerControl) {
 
@@ -518,9 +528,9 @@ public class VideoPlayerActivity extends AppCompatActivity
     }
 
     @Override
-    public void onError(Asset asset, String s) {
+    public void onError(Asset asset, String message) {
         videoPlayer.release();
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         finish();
     }
 
