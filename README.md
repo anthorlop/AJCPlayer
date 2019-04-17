@@ -1,6 +1,15 @@
 # AJCPlayer
 Audio and Video Player for Android with HLS and DASH support. Based on ExoPlayer
 
+## AJCPlayer 1.0.6 (2019-04-16)
+Chromecast library was deprecated so we have removed AJCast module
+ - If you want to add chromecast feature: 
+        https://developers.google.com/cast/docs/developers
+        https://developers.google.com/cast/docs/android_sender/integrate
+        https://github.com/googlecast/CastVideos-android
+
+
+
 ## Simple code
 ```gradle
 
@@ -9,9 +18,8 @@ repositories {
 }
 
 // AJCPlayer gradle dependencies
-compile 'es.lombrinus.projects.mods:AJCPlayer:1.0'
+compile 'es.lombrinus.projects.mods:AJCPlayer:1.0.6'
 compile 'es.lombrinus.projects.mods:AJCNotification:1.0' // if you want notifications
-compile 'es.lombrinus.projects.mods:AJCast:1.0' // if you want chromecast
 ```
 
 In activity layout:
@@ -70,6 +78,21 @@ Create Asset and Play video
 Asset asset = new Asset(idString, urlString, ContentType.VIDEO);
 videoPlayer.play(asset, true); // autoplay=true
 ```
+
+Create Asset and Play video (streaming or local) from a position
+```java
+Asset asset = new Asset(idString, urlString, ContentType.VIDEO);
+if (TextUtils.isEmpty(localPath)) {
+    asset.setmUrl(localPath);
+    asset.setLocalPath(true);
+}
+
+if (currentPosition <= 0) {
+    videoPlayer.play(asset, autoPlay);
+} else {
+    videoPlayer.play(asset, currentPosition, autoPlay);
+}
+```
 _____
 ## Summary. Step to Step
 1. Add dependencies to build.gradle
@@ -111,9 +134,8 @@ repositories {
 }
 
 // AJCPlayer dependencies
-compile 'es.lombrinus.projects.mods:AJCPlayer:1.0'
+compile 'es.lombrinus.projects.mods:AJCPlayer:1.0.6'
 compile 'es.lombrinus.projects.mods:AJCNotification:1.0' // if you want notifications
-compile 'es.lombrinus.projects.mods:AJCast:1.0' // if you want chromecast
 ```
 
 ### Main Interface
@@ -122,6 +144,7 @@ AJCPlayer is the main interface.
    <summary>AJCPlayer methods (Click to expand)</summary>
    
 * **play(Asset, boolean autoplay):** Play content from asset (url). You can start content automatically.
+* **play(Asset, boolean autoplay, int starPosition):** Play content from asset (url). You can start content from a specified position and start automatically.
 * **play(Asset, int starPosition):** Play content from asset (url). You can start content from a specified position.
 * **play():** Play content previously loaded / resume
 * **setOptions(PlaybackSettings settings)** Set options to play content. For example force Player to use MediaPlayer or add ContentTypes to determine if loaded content is DASH or HLS). Not required.
