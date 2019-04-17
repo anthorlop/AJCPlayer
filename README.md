@@ -4,9 +4,9 @@ Audio and Video Player for Android with HLS and DASH support. Based on ExoPlayer
 ## AJCPlayer 1.0.6 (2019-04-16)
 Chromecast library was deprecated so we have removed AJCast module
  - If you want to add chromecast feature: 
-        https://developers.google.com/cast/docs/developers
-        https://developers.google.com/cast/docs/android_sender/integrate
-        https://github.com/googlecast/CastVideos-android
+       - https://developers.google.com/cast/docs/developers
+       - https://developers.google.com/cast/docs/android_sender/integrate
+       - https://github.com/googlecast/CastVideos-android
 
 
 
